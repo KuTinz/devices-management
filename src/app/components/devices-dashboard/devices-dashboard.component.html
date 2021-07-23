@@ -1,0 +1,101 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h1 style="color: white">Management Devices</h1>
+    <div class="d-flex">
+      <button (click)="clickAddDevices()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              class="btn btn-success"> ADD
+      </button>
+    </div>
+  </div>
+</nav>
+
+<table class="table mt-3">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Devices</th>
+    <th scope="col">Type</th>
+    <th scope="col">Status</th>
+    <th scope="col">Employee</th>
+    <th scope="col">Description</th>
+    <th scope="col">Image</th>
+    <!--      <th scope="col">Device</th>-->
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of deviceData">
+    <td>{{ row.id }}</td>
+    <td>{{ row.device }}</td>
+    <td>{{ row.type }}</td>
+    <td>{{ row.status }}</td>
+    <td>{{ row.employee.name }}</td>
+    <td>{{ row.description }}</td>
+    <td><img [src]=row.image ></td>
+
+    <td>
+      <button (click)="editDevice(row)" style="color: white" type="button" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" class="btn btn-info">edit
+      </button>
+      <button (click)="deleteDevice(row)" class="btn btn-danger mx-3">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employees Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="InputNameDevice" class="form-label">Name of Device</label>
+            <input type="text" formControlName="device" class="form-control" id="InputNameDevice">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Type</label><br>
+            <input type="radio" value="pc" formControlName="type"> PC
+            <input type="radio" value="laptop" formControlName="type"> Laptop
+
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <input type="radio" value="in-stock" formControlName="status"> In Stock
+            <input type="radio" value="borrowed" formControlName="status"> Borrowed
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Employee Borrowed</label>
+            <!--            <input type="text" formControlName="employee" class="form-control" id="IdBorrowed">-->
+            <select formControlName="employee" class="form-select"
+                    aria-label="Default select example" >
+              <option value="" selected>Choose your color</option>
+              <option *ngFor="let employee of dataFrommApi" [ngValue]="employee">{{employee.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <input type="text" formControlName="description" class="form-control" id="Description">
+          </div>
+          <div class="mb-3">
+            <label for="Image" class="form-label">Image</label>
+            <img id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" height="180"/>
+            <input type="file" (change)="onselectFile($event)" formControlName="image" class="form-control" id="Image">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" *ngIf="isAdd" (click)="postDeviceDetails()" class="btn btn-primary">Add</button>
+        <button type="button" *ngIf="isUpdated" (click)="updateDeviceDetails()" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

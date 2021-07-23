@@ -1,0 +1,83 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h1 style="color: white">Management Employees</h1>
+    <div class="d-flex">
+      <button (click)="clickAddEmployee()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"> ADD</button>
+    </div>
+  </div>
+</nav>
+
+<table class="table mt-3">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Gender</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Email</th>
+    <th scope="col">Date 0f Birth</th>
+    <!--      <th scope="col">Device</th>-->
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of employeeData">
+    <td>{{ row.id }}</td>
+    <td>{{ row.name }}</td>
+    <td>{{ row.gender }}</td>
+    <td>{{ row.phone }}</td>
+    <td>{{ row.email }}</td>
+    <td>{{ row.date }}</td>
+
+    <td>
+      <button (click)="editEmployee(row)" style="color: white" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">edit</button>
+      <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employees Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="InputName" class="form-label">Name</label>
+            <input type="text" formControlName="name" class="form-control" id="InputName" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Gender</label><br>
+
+            <input type="radio" value="male" formControlName="gender"> Male
+            <input type="radio" value="female" formControlName="gender"> Female
+
+          </div>
+          <div class="mb-3">
+            <label for="InputPhone" class="form-label">Phone</label>
+            <input type="text" formControlName="phone" class="form-control" id="InputPhone">
+          </div>
+          <div class="mb-3">
+            <label for="InputEmail" class="form-label">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="InputEmail">
+          </div>
+          <div class="mb-3">
+            <label for="InputDate" class="form-label">Date</label>
+            <input type="date" formControlName="date" class="form-control" id="InputDate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" *ngIf="isAdd" (click)="postEmployDetails()" class="btn btn-primary">Add</button>
+        <button type="button" *ngIf="isUpdated" (click)="updateEmployDetails()" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

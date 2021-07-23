@@ -1,0 +1,57 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "Phat",
+      "gender": "male",
+      "phone": "0855051788",
+      "email": "hoangtanphatqn@gmail.com",
+      "date": "2021-07-07"
+    },
+    {
+      "id": 2,
+      "name": "Hoàng",
+      "gender": "female",
+      "phone": "0855051788",
+      "email": "hoangtanphatqn@gmail.com",
+      "date": "2021-07-13"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "device": "macbook",
+      "type": "laptop",
+      "status": "in-stock",
+      "employee": {
+        "id": 1,
+        "name": "Phat",
+        "gender": "male",
+        "phone": "0855051788",
+        "email": "hoangtanphatqn@gmail.com",
+        "date": "2021-07-07"
+      },
+      "description": "macbook",
+      "image": "C:\\fakepath\\9o&.png"
+    },
+    {
+      "id": 2,
+      "device": "macbook",
+      "type": "pc",
+      "status": null,
+      "employee": {
+        "id": 2,
+        "name": "Hoàng",
+        "gender": "female",
+        "phone": "0855051788",
+        "email": "hoangtanphatqn@gmail.com",
+        "date": "2021-07-13"
+      },
+      "description": "asdasd",
+      "image": "C:\\fakepath\\9o&.png"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
